@@ -18,14 +18,19 @@ body {
     margin-left: auto;
     margin-right: auto;
     padding-left: 15px;
-    padding-right: 15px
+    padding-right: 15px;
+    text-align: justify;
+    text-justify: inter-word;
+    
 }
 
 .container-v1 {
     margin-left: auto;
     margin-right: auto;
     padding-left: 15px;
-    padding-right: 15px
+    padding-right: 15px;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 @media (min-width:992px) {
