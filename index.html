@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="./styles/style.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
     <link rel="icon" type="image/svg" href="assets/thunder.svg" />
 
 
@@ -12,25 +12,44 @@
 </head>
 
 <body>
-    <div id="dhead" class="container">
+    <div id="dhead" class="container-v1">
         <div class="row">
             <div id="dpic">
-                <img src="assets/foto1.png" class="ppic" />
+                <img src="assets/me.png" class="ppic" />
             </div>
             <div id="ddesc">
                 <h1>Gabriel Santos</h1>
-                <h2>About me?</h2>
+                <h2>Student at University of Minho</h2>
                 <div id="dico">
                     <a href="https://github.com/gabrielopesantos"><img src="assets/githubsvg.svg" class="iico" /></a>
-                    <a href="https://linkedin.com/jgabrielsantos"><img src="assets/linkedinsvg.svg" class="iico" /></a>
-                    <img src="assets/emailsvg.svg" style="cursor: pointer;" class="iico" id="iemail" title="click to reveal" />
+                    <a href="https://www.linkedin.com/in/jgabrielsantos/"><img src="assets/linkedinsvg.svg"
+                            class="iico" /></a>
+                    <img src="assets/emailsvg.svg" style="cursor: pointer;" class="iico" id="emailbtn"
+                        title="Click to reveal" />
+                    <a href="./assets/files/CV_GabrielSantos.pdf" title="Download Curriculum Vitae" download><img
+                            src="assets/cv.svg" class="iico" /></a>
                 </div>
-                <div id="demail"></div>
+                <div id="emaildiv"></div>
             </div>
         </div>
     </div>
     <hr>
 
+    <div class="container">
+        <h1 class="stitle">About me</h1>
+        My name is Gabriel Santos, I'm currently studying for a Master's degree in Computer Science at University of
+        Minho, Portugal. This degree is mainly focused in Machine Learning and Deep Learning. I also have a Bachelor's
+        Degree in Computer Science from Polythecnic Institude of Viana do Castelo.
+    </div>
+    <br style="margin-top: 25px; margin-bottom: 25px;">
+    <div class="container">
+        <h1 class="stitle">Interests</h1>
+        Since my first contact with Artificial Intelligence in my Master's Degree I've been interested in it and it's
+        applications in real problems. For now I've been mostly studying Machine Learning,
+        Deep
+        Learning and Computer Vision.
+    </div>
+    <br style="margin-top: 25px; margin-bottom: 25px;">
     <div id="history" class="container">
         <h1 class="stitle">Timeline</h1>
         <div class="entry row">
@@ -58,15 +77,22 @@
             </div>
             <div class="desc">
                 <div class="htxt">
-                    <p id="where">Polythecnics Institude of Viana do Castelo</p>
+                    <p id="where">Polythecnic Institute of Viana do Castelo</p>
                     Bachelor's Degree in Computer Science.
                 </div>
             </div>
         </div>
     </div>
+    <br style="margin-top: 25px; margin-bottom: 25px;">
     <div class="container">
-        <h1 class="stitle">Interests</h1>
+        <h1 class="stitle">Projects</h1>
+        All projects developed until now are on my personal <a href="https://github.com/gabrielopesantos">GitHub</a>. In
+        a near future I'll create a description for each here.
     </div>
+    <footer style="border-top: solid 1px #bdc1c4; background-color: #f2f3f3; margin-top: 20px;">
+        <div class="container-v1" style="text-align: center; color: black; font-size: 12px; padding-bottom: 1px;">
+            © 2020 gabrielopesantos.github.io</div>
+    </footer>
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -76,7 +102,17 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script> -->
-    <script src="https://kit.fontawesome.com/00d4b52d97.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/00d4b52d97.js" crossorigin="anonymous"></script> -->
+    <script>
+        var shown = false;
+        document.getElementById('emailbtn').addEventListener("click", function () {
+            let emaildiv = document.getElementById('emaildiv');
+            emaildiv.innerHTML = 'gabrielopesantos97' + "@" + "gmail.com";
+            emaildiv.style.opacity = shown ? 0 : 1;
+            shown = !shown;
+        })
+    </script>
+
 </body>
 
 </html>

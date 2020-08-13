@@ -1,7 +1,8 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5;
+    /* background-color: white; */
+    background-color: #EEEEEE;
     font-family: sans-serif;
     font-size: 16px;
     line-height: 1.4;
@@ -9,6 +10,18 @@ body {
 }
 
 .container {
+    background-color: white;
+    box-shadow: 1px 2px 3px #dddddd;
+    border-radius: 3px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px
+}
+
+.container-v1 {
     margin-left: auto;
     margin-right: auto;
     padding-left: 15px;
@@ -37,8 +50,9 @@ body {
 
 #ddesc {
     padding-top: 45px;
-    padding-left: 20px;
-    grid-column: span 6
+    padding-left: 15px;
+    grid-column: span 6;
+    /* margin-left: 15px; */
 }
 
 @media (max-width:991px) {
@@ -83,13 +97,14 @@ h2 {
 
 .iico {
     width: 30px;
-    height: 30px
+    height: 30px;
 }
 
-#demail {
-    margin-top: 10px;
+#emaildiv {
+    font-size: 14px;
+    margin-top: 5px;
     color: #555;
-    opacity: 0;
+    opacity: 0; 
     transition: opacity .7s
 }
 
@@ -153,5 +168,16 @@ hr {
 }
 
 .stitle {
-    margin-bottom: 15px
+    font:  24px 'Source Serif Pro', Georgia, "Times New Roman", serif;
+    margin-bottom: 10px;
+    font-style: bold;
+    height: auto;
+    width: auto;
+}
+
+.separator {
+    width: 25%;
+    margin: auto;
+    margin-bottom: 25px;
+    margin-top: 25px;
 }
