@@ -8,7 +8,7 @@ theme = "archie"
 	favicon="favicon.ico"
 	subtitle="Software Engineer at OutSystems"
 	mode="dark"
-	useCDN=false
+	useCDN=true
 
 # Social Tags
 
