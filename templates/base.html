@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ config.title }}</title>
+  <meta name="description" content="{{ config.description }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #fafafa;
+      --fg: #121212;
+      --link: #0066cc;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121212;
+        --fg: #e0e0e0;
+        --link: #8ab4f8;
+      }
+    }
+    body {
+      font-family: "Noto Serif", serif;
+      max-width: 40rem;
+      margin: 4rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+    }
+    main, footer {
+      text-align: center;
+    }
+    footer {
+      margin-top: 2rem;
+    }
+    footer > * {
+      margin: 0 0.5rem;
+    }
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .email {
+      cursor: pointer;
+      color: var(--link);
+      font-size: 0.9rem;
+    }
+    .email:hover {
+      text-decoration: underline;
+    }
+    svg {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  {% block content %}{% endblock content %}
+</body>
+</html>
