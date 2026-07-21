@@ -1,8 +1,9 @@
 base_url = "https://gabrielopesantos.com"
 title = "gabrielopesantos"
-description = "There's nothing to see here."
+description = "Gabriel's personal website"
 compile_sass = false
 build_search_index = false
+minify_html = true
 
 [markdown]
 highlight_code = false

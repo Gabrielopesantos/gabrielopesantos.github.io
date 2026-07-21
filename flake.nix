@@ -23,8 +23,13 @@
             pname = "gabrielopesantos-website";
             version = "0.1.0";
             src = ./.;
-            nativeBuildInputs = [ pkgs.zola ];
+            nativeBuildInputs = [
+              pkgs.zola
+              pkgs.nodePackages.terser
+            ];
             buildPhase = ''
+              terser static/flow-field.js --compress --mangle --output static/flow-field.js.min
+              mv static/flow-field.js.min static/flow-field.js
               zola build
             '';
             installPhase = ''

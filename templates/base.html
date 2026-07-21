@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ config.title }}</title>
   <meta name="description" content="{{ config.description }}">
+  <script>document.documentElement.className = 'js';</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="icon" type="image/png" href="/favicon.png">
   <style>
@@ -16,56 +17,211 @@
       --bg: #fafafa;
       --fg: #121212;
       --link: #0066cc;
+      --panel-bg: rgba(15, 15, 18, 0.82);
+      --panel-border: rgba(255, 255, 255, 0.12);
+      --panel-fg: #f4f4f5;
+      --panel-muted: rgba(244, 244, 245, 0.65);
+      --link-on-dark: #a5b4fc;
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #121212;
-        --fg: #e0e0e0;
-        --link: #8ab4f8;
+        --bg: #0b0b0d;
+        --fg: #f4f4f5;
+        --link: var(--link-on-dark);
       }
     }
-    body {
-      font-family: "Noto Serif", serif;
-      max-width: 40rem;
-      margin: 4rem auto;
-      padding: 0 1rem;
-      line-height: 1.6;
-      color: var(--fg);
+
+    /* Canvas background is always dark once JS draws it, regardless of system theme */
+    .js .site-info {
+      color: var(--panel-fg);
+    }
+    .js .site-info a,
+    .js .site-info .email {
+      color: var(--link-on-dark);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
       background: var(--bg);
+      color: var(--fg);
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      line-height: 1.6;
     }
-    main, footer {
+
+    body {
+      position: relative;
+    }
+
+    #flow-field {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .site-info {
+      position: fixed;
+      bottom: clamp(1.5rem, 6vw, 3.5rem);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
+      gap: clamp(0.6rem, 2.5vw, 0.9rem);
+      width: 100%;
+      max-width: 30rem;
+      padding: 0 1rem;
+      color: var(--fg);
     }
+
+    main p {
+      margin: 0;
+      white-space: nowrap;
+      font-size: clamp(1rem, 3.5vw, 1.4rem);
+      font-weight: 600;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+    }
+
     footer {
-      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(0.9rem, 4vw, 1.25rem);
     }
-    footer > * {
-      margin: 0 0.5rem;
-    }
+
     a {
       color: var(--link);
       text-decoration: none;
     }
-    a:hover {
+    a:hover, .email:hover {
       text-decoration: underline;
     }
+
     .email {
       cursor: pointer;
       color: var(--link);
-      font-size: 0.9rem;
+      font-size: clamp(1rem, 3.5vw, 1.4rem);
     }
-    .email:hover {
-      text-decoration: underline;
-    }
+
     svg {
       display: inline-block;
       vertical-align: middle;
+      width: clamp(1.3rem, 4.5vw, 1.6rem);
+      height: clamp(1.3rem, 4.5vw, 1.6rem);
+      filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.45));
+    }
+
+    #ff-toggle {
+      position: fixed;
+      bottom: 0.75rem;
+      right: 0.75rem;
+      z-index: 20;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: var(--panel-fg);
+      opacity: 0.06;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.2s ease;
+    }
+    #ff-toggle:hover, #ff-toggle:focus-visible {
+      opacity: 0.45;
+    }
+    #ff-toggle svg {
+      width: 1rem;
+      height: 1rem;
+      filter: none;
+    }
+
+    #ff-panel {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 20;
+      width: 240px;
+      max-width: calc(100vw - 2rem);
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      font-size: 0.85rem;
+      color: var(--panel-fg);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    }
+    #ff-panel[hidden] { display: none; }
+    #ff-panel h4 {
+      margin: 0 0 0.6rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--panel-muted);
+    }
+    #ff-panel h4:not(:first-child) { margin-top: 1rem; }
+    #ff-panel .row { margin-bottom: 0.75rem; }
+    #ff-panel .row label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      margin-bottom: 0.25rem;
+      color: var(--panel-muted);
+    }
+    #ff-panel .row span { font-family: ui-monospace, monospace; color: var(--panel-muted); }
+    #ff-panel input[type=range] { width: 100%; }
+    #ff-panel .modes { display: flex; gap: 0.4rem; margin-top: 0.35rem; }
+    #ff-panel .modes button { flex: 1; }
+    #ff-panel button {
+      background: rgba(255,255,255,0.08);
+      color: var(--panel-fg);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 0.4rem;
+      padding: 0.35rem 0.6rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    #ff-panel button:hover { background: rgba(255,255,255,0.16); }
+    #ff-panel button.active { background: rgba(255,255,255,0.9); color: #111; border-color: transparent; }
+
+    #ff-ui { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
+    #ff-info {
+      margin-top: 0.75rem;
+      color: var(--panel-muted);
+      font-size: 0.75rem;
+      font-family: ui-monospace, monospace;
     }
   </style>
 </head>
 <body>
+  <canvas id="flow-field"></canvas>
+
+  <button id="ff-toggle" aria-label="Show flow field controls" aria-controls="ff-panel" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M19.14 12.94c.04.3.06.61.06.94 0 .32-.02.64-.06.94l2.03 1.58c.18.14.23.4.12.61l-1.92 3.32c-.12.22-.37.29-.59.22l-2.39-.96c-.5.38-1.03.7-1.62.94l-.36 2.54c-.05.24-.27.42-.53.42h-3.84c-.26 0-.48-.18-.53-.42l-.36-2.54a6.013 6.013 0 0 1-1.62-.94l-2.39.96c-.22.08-.47 0-.59-.22l-1.92-3.32c-.12-.22-.07-.47.12-.61l2.03-1.58A6.013 6.013 0 0 1 4.94 12c0-.32.02-.64.06-.94l-2.03-1.58c-.18-.14-.23-.4-.12-.61l1.92-3.32c.12-.22.37-.29.59-.22l2.39.96c.5-.38 1.03-.7 1.62-.94l.36-2.54c.05-.24.27-.42.53-.42h3.84c.26 0 .48.18.53.42l.36 2.54c.59.24 1.12.56 1.62.94l2.39-.96c.22-.08.47 0 .59.22l1.92 3.32c.12.22.07.47-.12.61l-2.03 1.58zM12 15c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3z"/>
+    </svg>
+  </button>
+  <noscript><style>#ff-toggle { display: none; }</style></noscript>
+
   {% block content %}{% endblock content %}
   <script data-goatcounter="https://gabrielopesantos.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script>
+
+  <script src="/flow-field.js"></script>
 </body>
 </html>
