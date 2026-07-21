@@ -201,9 +201,6 @@
       particles.push(p);
     }
 
-    const info = document.getElementById('ff-info');
-    if (info) info.textContent = `color: ${colorMode}`;
-
     ctx.fillStyle = '#0b0b0d';
     ctx.fillRect(0, 0, W, H);
   }
@@ -264,8 +261,6 @@
       colorMode = mode;
       if (gradBtn) gradBtn.classList.toggle('active', mode === COLOR_MODE.GRADIENT);
       if (conBtn) conBtn.classList.toggle('active', mode === COLOR_MODE.CONTRAST);
-      const info = document.getElementById('ff-info');
-      if (info) info.textContent = `color: ${mode}`;
     }
     if (gradBtn) gradBtn.addEventListener('click', () => setColorMode(COLOR_MODE.GRADIENT));
     if (conBtn) conBtn.addEventListener('click', () => setColorMode(COLOR_MODE.CONTRAST));
