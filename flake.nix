@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
   };
 
   outputs =
@@ -25,7 +25,7 @@
             src = ./.;
             nativeBuildInputs = [
               pkgs.zola
-              pkgs.nodePackages.terser
+              pkgs.terser
             ];
             buildPhase = ''
               terser static/flow-field.js --compress --mangle --output static/flow-field.js.min
